@@ -73,3 +73,11 @@ border: 1px solid darkslategray;}
 table {
     border-collapse: collapse;
 }
+
+.valormayor {
+    text-align: center;
+}
+
+.descripcionmayor {
+    width: 500px;
+}

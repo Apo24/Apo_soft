@@ -1,4 +1,5 @@
 <?php include("db.php")?>
+<?php error_reporting (0); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +83,8 @@
         <input type="number" class="nr_asiento1" name="c_asiento2">
         <table>
         <thead>
+            <?php 
+        if(isset($_POST['c_asiento2'])) { ?>
             <tr class="tituloctas">
                  <th><strong>Asiento</strong></th>
                  <th><strong>Fecha</strong></th>
@@ -94,7 +97,7 @@
         
         <tbody>
         <?php 
-        if(isset($_POST['c_asiento2'])) {
+        
         $c_asiento = $_POST['c_asiento2'];
         
         $query4 ="SELECT * FROM registros LEFT JOIN cuentas ON registros.id_Registros = cuentas.id_cuentas WHERE Asiento = $c_asiento"; 
@@ -122,9 +125,78 @@
         </form>
         </fieldset>
 
+        <fieldset class="container">
+        <legend align="left"><strong>Consultar Asiento</strong></legend>
+        <form action="index.php" method="POST">
+        <label for="">Fecha: Desde </label>
+        <input type="date" class="fechaini1" name="fechaini_1">
+        <label for="">Hasta </label>
+        <input type="date" class="fechaini2" name="fechaini_2"></br>
+        <label for="">Cuenta: </label>
+        <select required class="inputselect" name="cuenta3" id="">
+                        <?php
+                        $query ="SELECT *FROM cuentas";
+                        $result_cuentas = mysqli_query($conn, $query);
+                        
+                        while ($row = mysqli_fetch_array($result_cuentas)) { ?>
+                        <option value=<?php echo $row["id_cuentas"]; ?>><?php echo $row["nombre"]?></option>
+                        <?php } ?>
+
+        </select>
+        <br>
+        <input type="submit" class="button" value="Consultar Mayor">
+        </form>
+        <?php 
+        if(isset($_POST['fechaini_1'])) { ?>
+        <table>
+        <thead>
+            <tr>
+                <th style="width: 100px">Fecha</th>
+                <th style="width: 300px">Descripcion</th>
+                <th>Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php }?>
+        <?php 
+        if(isset($_POST['fechaini_1'])) { 
+            $c_fechaini1 = $_POST['fechaini_1'];
+            $c_fechaini2 = $_POST['fechaini_2'];
+            $c_cuenta3 = $_POST['cuenta3']; 
+        
+        $query5 ="SELECT * FROM registros LEFT JOIN cuentas ON registros.id_Registros = cuentas.id_cuentas WHERE cuenta = $c_cuenta3 AND date1 between '$c_fechaini1' and '$c_fechaini2'"; 
+        $resultado_c2 = mysqli_query($conn, $query5);
+        
+        
+
+        while ($row = mysqli_fetch_array($resultado_c2)) { ?>
+
+            <tr>
+                <td><?php echo $row['date1'];?></td>
+                <td stylr="margin-left: 10px"><?php echo $row['descripcion'];?></td>
+                <td style="text-align: center"><?php echo $row['valor'];?></td>
+            </tr>
+    
+            
+        <?php 
+        
+        $suma = $suma + $row['valor'];
+        
+        } }
+
+        ?>        
+        <tr>
+            <td></td>
+            <td style="tex-align: rigth"><strong>Total:</strong></td>
+            <td><strong><?php echo $suma?></strong></td>
+        </tr>           
+
+        </tbody>
+        </table>
 
 
 
+        </fieldset>
     </main>
 </body>
 </html>
