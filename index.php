@@ -174,7 +174,7 @@
             <tr>
                 <td><?php echo $row['date1'];?></td>
                 <td stylr="margin-left: 10px"><?php echo $row['descripcion'];?></td>
-                <td style="text-align: center"><?php echo $row['valor'];?></td>
+                <td style="text-align: right"><?php echo $row['valor'];?></td>
             </tr>
     
             
@@ -182,14 +182,15 @@
         
         $suma = $suma + $row['valor'];
         
-        } }
+        }
 
         ?>        
         <tr>
             <td></td>
-            <td style="tex-align: rigth"><strong>Total:</strong></td>
+            <td><strong>Total:</strong></td>
             <td><strong><?php echo $suma?></strong></td>
-        </tr>           
+        </tr>     
+        <?php } ?>      
 
         </tbody>
         </table>
