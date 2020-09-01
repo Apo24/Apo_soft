@@ -152,6 +152,7 @@
         <thead>
             <tr>
                 <th style="width: 100px">Fecha</th>
+                <th style="width: 80px">Asiento</th>
                 <th style="width: 300px">Descripcion</th>
                 <th>Monto</th>
             </tr>
@@ -165,6 +166,7 @@
             $c_cuenta3 = $_POST['cuenta3']; 
         
         $query5 ="SELECT * FROM registros LEFT JOIN cuentas ON registros.id_Registros = cuentas.id_cuentas WHERE cuenta = $c_cuenta3 AND date1 between '$c_fechaini1' and '$c_fechaini2'"; 
+        
         $resultado_c2 = mysqli_query($conn, $query5);
         
         
@@ -173,6 +175,7 @@
 
             <tr>
                 <td><?php echo $row['date1'];?></td>
+                <td style="text-align: center"><?php echo $row['Asiento'];?></td>
                 <td stylr="margin-left: 10px"><?php echo $row['descripcion'];?></td>
                 <td style="text-align: right"><?php echo $row['valor'];?></td>
             </tr>
@@ -186,6 +189,7 @@
 
         ?>        
         <tr>
+            <td></td>
             <td></td>
             <td><strong>Total:</strong></td>
             <td><strong><?php echo $suma?></strong></td>
