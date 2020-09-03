@@ -1,13 +1,16 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 html {
     box-sizing: border-box;
     font-size: 62.5%;
     background-color: #b7ebc3;
 }
 
-*, *:before, *:after {
-    box-sizing: inherit;
+.none {
+    display: none;
 }
-
 
 .container {
     font-size: 18px;
